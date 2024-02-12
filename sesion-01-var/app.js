@@ -31,4 +31,4 @@ let valorNulo = null;
 let valorNoDefinido = undefined;
 
 
-let simbolo = Symbol("miSimbolo");
+let simbolo = Symbol("miSimbolo"); 
