@@ -6,8 +6,54 @@ body{
  .calculadora{
     max-width: 400px;
     margin: auto;
-    background-color: antiquewhite;
+    background-color: rgb(252, 115, 186);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+ }
+
+ h3{
+   color: rgb(255, 216, 236);
+   text-shadow: 0 0 0.3em rgb(0, 0, 0);
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ }
+
+ label{
+   color: rgb(255, 205, 231);
+   text-shadow: 0 0 0.3em rgb(0, 0, 0);
+ }
+
+ input#operando1{
+   border-radius: 20px;
+   background: rgb(255, 216, 236);
+ }
+
+ input#operando2{
+   border-radius: 20px;
+   background: rgb(255, 216, 236);
+ }
+
+ select#operador{
+   border-radius: 20px;
+   background: rgb(255, 216, 236);
+ }
+
+ button.btn-primary{
+   background: rgb(168, 45, 108);
+   border-radius: 20px;
+   border-color: rgb(255, 173, 215);
+ }
+
+ button.btn-primary:hover{
+   background: rgb(255, 247, 158);
+   color: rgb(168, 45, 108);
+ }
+
+ #resultado.mt-3{
+   display: flex;
+   background: rgb(255, 147, 203);
+   border-radius: 20px;
+   justify-content: flex-start;
+   padding: 10px;
+   color: white;
  }
