@@ -6,16 +6,37 @@
         <title>Digito Verificador</title>
         <link rel="stylesheet" href="/Ejercicios/digito-verificador/style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="/Ejercicios/digito-verificador/app.js"></script>
     </head>
 
     <body>
         <div class="container verificador">
-            <h1 class="text-center">Verificador de dígitos</h1>
+            <h1 class="text-center">Sistema de validación mediante dígito verificador</h1>
+            <img src="/Ejercicios/digito-verificador/recursos/ver.jpg"
             <form id="verificadorFormulario">
-                
+                <!--Ingresar número para crear identificador-->
+                <div class="form-group">
+                    <label for="numeroId">Ingrese su número de identificación: </label>
+                    <input type="number" class="form-control" id="numeroId" placeholder="Ej: 1234567890">
+                    <!--botón para crear el identificador-->
+                    <button id="calcularDVButton" type="button" class="btn-primary">Crear</button>
+                    <div class="resultado"></div>
+                </div>
+                <!--Verificar existencia del digito-->
+                <div class="form-group">
+                    <label for="dos">Verifique su existencia en la lista: </label>
+                    <input type="number" class="form-control" id="dos" placeholder="Ej: 1234567890-0">
+                    <!--botón para realizar la función del Js-->
+                    <button type="button" class="btn-primary" onclick="">Buscar</button>
+                </div>
             </form>
 
         </div>
+
+        <!--Scripts-->
+        <script src="/Ejercicios/digito-verificador/Scripts/calculos.js" type="module"></script>
+        <script>
+            //funciones importadas desde Js
+            import {calcularDigito, mostrarDV} from '.calculos.js';
+        </script>
     </body>
 </html>
