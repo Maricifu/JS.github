@@ -1,3 +1,5 @@
+const listado= [];
+
 //funcion para crear el dígito verificador
 function calcularDigito(num){
     //obtener numero sin digito verificador
@@ -19,8 +21,8 @@ function calcularDigito(num){
     //resta del resultado obtenido de 11
     let digitoV= 11-resta;
 
-    //verificar que el digito sea mayor a 9
-    if (digitoV <9){
+    //verificar que el digito sea mayor o igual a 10
+    if (digitoV >=10){
         digitoV = 0;
     }
 
@@ -29,7 +31,7 @@ function calcularDigito(num){
 }
 
 //funcion para mostrar el dígito verificador 
-function mostrarDV(){
+export function mostrarDV(){
     let numeroId=document.getElementById('numeroId').value;
     let resultado= document.getElementById('resultado')
 
@@ -42,7 +44,6 @@ function mostrarDV(){
     }
 }
 
-export{calcularDigito, mostrarDV};
 
 
 

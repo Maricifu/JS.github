@@ -28,32 +28,3 @@
     ***11 − 8 = 3***
     
 3. Finalmente, el dígito verificador será el obtenido en la resta: 201012341-3.
-
-
-<script src="calculos.js" type="module"></script>
-    <script>
-        // Importamos las funciones desde el archivo calculos.js
-        import { calcularDV, calcularDigitoVerificador } from './calculos.js';
-
-        // Agregamos un event listener al botón para ejecutar la función calcularDV al hacer clic
-        document.getElementById('calcularDVButton').addEventListener('click', function() {
-            // Ejecutamos la función calcularDV
-            calcularDV();
-
-            // Obtenemos el número de identificación desde el input
-            let numeroIdentificacion = document.getElementById('numeroIdentificacion').value;
-
-            // Si hay un número de identificación ingresado
-            if (numeroIdentificacion) {
-                // Calculamos el dígito verificador
-                let digitoVerificador = calcularDigitoVerificador(numeroIdentificacion);
-                
-                // Mostramos el resultado en el elemento con id "resultado"
-                document.getElementById('resultado').textContent = 'Dígito Verificador: ' + digitoVerificador;
-            } else {
-                // Si no hay un número de identificación ingresado, mostramos un mensaje de error
-                document.getElementById('resultado').textContent = 'Por favor ingresa un número de identificación válido.';
-            }
-        });
-    </script>
-    
