@@ -1,15 +1,15 @@
 //lista para almacenar los pares numero-digito verificador
-let listaNumeros= [];
+const listaNumeros= [];
 
 
 /*Paso 1*/
 //funcion para crear el dígito verificador
 function calcularDigito(num){
     //obtener numero sin digito verificador
-    let numSin= num.replace(/[^0-9]/g, '');
+    const numSin= num.replace(/[^0-9]/g, '');
 
     //invertir el numero 
-    let numInvert= numSin.split('').reverse().join('');
+    const numInvert= numSin.split('').reverse().join('');
 
     //multiplicar los numeros en secuencia
     let suma=0;
@@ -19,10 +19,10 @@ function calcularDigito(num){
     }
 
     //calcular el modulo de 11
-    let resta = suma % 11;
+    const resta = suma % 11;
 
     //resta del resultado obtenido de 11
-    let digitoV= 11-resta;
+    const digitoV= 11-resta;
 
     //verificar que el digito sea mayor o igual a 10
     if (digitoV >=10){
@@ -30,17 +30,17 @@ function calcularDigito(num){
     }
 
     //retornar el numero con el digito verificador 
-    return numSin + '-' + digitoV;
+    return `${numSin}-${digitoV}`;
 }
 
 //funcion para mostrar el dígito verificador 
 export function mostrarDV(){
-    let numeroId=document.getElementById('numeroId').value;
-    let resultado= document.getElementById('resultado')
+    const numeroId=document.getElementById('numeroId').value.trim();
+    const resultado= document.getElementById('resultado')
 
     if (numeroId){
         let numConDV= calcularDigito(numeroId);
-        resultado.textContent= 'Dígito verificador: ' + numConDV;
+        resultado.textContent = `Dígito verificador: ${numConDV}`;
     }
     else{
         resultado.textContent= 'Por favor ingresa un número de identificación válido :c';
@@ -52,7 +52,7 @@ export function mostrarDV(){
 //funcion para generar el digito verificador y agregarlo a la lista 
 export function generarDigitoVerificador(num){
     const digitoV= calcularDigito(num);
-    const numConDV= num + '-' + digitoV;
+    const numConDV= `${digitoV}`;
     listaNumeros.push(numConDV);
     return numConDV;
 }
