@@ -13,7 +13,7 @@
             <h1 class="text-center">Sistema de validación mediante dígito verificador</h1>
             <img src="/Ejercicios/digito-verificador/recursos/ver.jpg">
             <form id="verificadorFormulario">
-                <!--Ingresar número para crear identificador-->
+                <!--Generar digito verificador-->
                 <div class="form-group">
                     <label for="numeroId">Ingrese su número de identificación: </label>
                     <input type="number" class="form-control" id="numeroId" placeholder="Ej: 1234567890">
@@ -21,24 +21,66 @@
                     <button id="calcularDVButton" type="button" class="btn-primary">Crear</button>
                     <div id="resultado"></div>
                 </div>
-                <!--Verificar existencia del digito-->
+                <!--Verificar existencia en a lista-->
                 <div class="form-group">
-                    <label for="dos">Verifique su existencia en la lista: </label>
-                    <input type="number" class="form-control" id="dos" placeholder="Ej: 1234567890-0">
-                    <!--botón para realizar la función del Js-->
-                    <button type="button" class="btn-primary">Buscar</button>
+                    <label for="numConDVInput">Verifique su existencia en la lista: </label>
+                    <input type="number" class="form-control" id="numConDVInput" placeholder="Ej: 1234567890-0">
+                    <!-- Botón para verificar existencia en la lista -->
+                    <button id="verificarExistenciaButton" type="button" class="btn-primary">Buscar</button>
+                    <div id="existenciaResultado"></div>
+                </div>
+                <!-- Mostrar listado de números y dígitos verificadores -->
+                <div class="form-group">
+                    <label for="listado">Mostrar listado de números y dígitos verificadores</label>
+                    <button id="mostrarListadoButton" type="button" class="btn-primary">Mostrar Listado</button>
+                    <table id="listado" style="display:none;">
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>Dígito Verificador</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listadoBody"></tbody>
+                    </table>
                 </div>
             </form>
-
         </div>
+
 
         <!--Scripts-->
         <script type="module">
-            // Importa la función mostrarDV desde el módulo calculos.js
-            import { mostrarDV } from '/Ejercicios/digito-verificador/Scripts/calculos.js';
-
-            //event listener al boton para ejecutar la funcion mostrarDV al hacer click
-            document.getElementById('calcularDVButton').addEventListener('click', mostrarDV);
+            // Importa las funciones necesarias desde el módulo calculos.js
+            import { generarDigitoVerificador, verificarExistencia, mostrarListado } from '/Ejercicios/digito-verificador/Scripts/calculos.js';
+    
+            // Event listener al botón para generar el dígito verificador
+            document.getElementById('calcularDVButton').addEventListener('click', function() {
+                // Obtener el número de identificación ingresado
+                const numeroId = document.getElementById('numeroId').value;
+                // Generar el dígito verificador
+                const numeroConDV = generarDigitoVerificador(numeroId);
+                // Mostrar el resultado
+                document.getElementById('resultado').textContent = 'Número con dígito verificador: ' + numeroConDV;
+            });
+    
+            // Event listener al botón para verificar existencia en la lista
+            document.getElementById('verificarExistenciaButton').addEventListener('click', function() {
+                // Obtener el número con dígito verificador ingresado
+                const numConDV = document.getElementById('numConDVInput').value;
+                // Verificar existencia en la lista
+                if (verificarExistencia(numConDV)) {
+                    document.getElementById('existenciaResultado').textContent = 'El número con dígito verificador ' + numConDV + ' existe en la lista.';
+                } else {
+                    document.getElementById('existenciaResultado').textContent = 'El número con dígito verificador ' + numConDV + ' no existe en la lista.';
+                }
+            });
+    
+            // Event listener al botón para mostrar el listado de números y dígitos verificadores
+            document.getElementById('mostrarListadoButton').addEventListener('click', function() {
+                // Mostrar el listado
+                document.getElementById('listado').style.display = 'block';
+                // Mostrar los números y dígitos verificadores en el listado
+                mostrarListado();
+            });
         </script>
     </body>
 </html>

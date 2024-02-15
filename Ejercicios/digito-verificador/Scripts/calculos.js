@@ -1,5 +1,8 @@
-const listado= [];
+//lista para almacenar los pares numero-digito verificador
+let listaNumeros= [];
 
+
+/*Paso 1*/
 //funcion para crear el dígito verificador
 function calcularDigito(num){
     //obtener numero sin digito verificador
@@ -44,6 +47,37 @@ export function mostrarDV(){
     }
 }
 
+/*Paso 2*/
 
+//funcion para generar el digito verificador y agregarlo a la lista 
+export function generarDigitoVerificador(num){
+    const digitoV= calcularDigito(num);
+    const numConDV= num + '-' + digitoV;
+    listaNumeros.push(numConDV);
+    return numConDV;
+}
 
+//funcion para verificar si un numero con identificador existe en la lista
+export function verificarExistencia(numConDV){
+    return listaNumeros.includes(numConDV);
+}
 
+/*Paso 3*/
+
+//funcion para mostrar el listado de numeros y el digito verificador en una tabla
+export function mostrarListado() {
+    const listadoBody = document.getElementById('listadoBody');
+    listadoBody.innerHTML = '';
+
+    listaNumeros.forEach(numeroConDV => {
+        const [num, digitoV] = numConDV.split('-');
+        const row = `<tr><td>${num}</td><td>${digitoV}</td></tr>`;
+        listadoBody.innerHTML += row;
+    });
+}
+
+//función para ocultar o mostrar el listado de números
+export function toggleListado() {
+    const listado = document.getElementById('listado');
+    listado.style.display = listado.style.display === 'none' ? 'block' : 'none';
+}
