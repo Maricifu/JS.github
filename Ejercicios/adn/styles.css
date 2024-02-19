@@ -14,10 +14,44 @@
     border-radius: 20px;
 }
 
+.container h1{
+    color: white;
+    font-size: 3rem;
+    text-shadow: 5px 5px 5px rgba(88, 8, 88, 0.705);
+}
+
+.container h5{
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(119, 34, 119, 0.562);
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
 .container-formulario{
     padding: 20px;
     display: flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.377);
     border-radius: 20px;
+}
+
+.container-formulario form label{
+    color: rgb(94, 5, 94);
+}
+
+.container-formulario button{
+    margin-top: 10px;
+    padding: 3px;
+    border-radius: 20px;
+    font-size: 1rem;
+    color: rgb(255, 218, 255);
+    background-color: rgb(131, 43, 131);
+    border-color: white;
+}
+
+.container-formulario button:hover{
+    background-color: plum;
+    color: rgb(94, 5, 94);
+    border-color: white;
 }
