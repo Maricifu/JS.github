@@ -1,3 +1,5 @@
+///////////////////link página web: http://127.0.0.1:5500/Ejercicios/adn/index.html
+
 ⚙ La policía local requiere un sistema de validación de ADN para determinar la responsabilidad de individuos que hayan estado en la escena de un crimen. Se busca una aplicación con una interfaz amigable para el usuario. A continuación, se detallan los requisitos para la verificación de ADN.
 
 ⚙ La policía mantiene dos listas de información; la primera contiene el nombre de las personas registradas en la región (nombre y apellido), la otra, un cromosoma representativo del DNA de cada una de esas personas.
