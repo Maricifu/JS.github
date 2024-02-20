@@ -6,6 +6,7 @@
         <title>DNA Database</title>
         <link rel="stylesheet" href="/Ejercicios/adn/styles.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="/Ejercicios/adn/scripts/app.js"></script>
     </head>
 
     <body>
@@ -14,15 +15,21 @@
             <h5 class="text-center">Mediante este sistema de validación de ADN al ingresar la secuencia de cormosomas encontrados en la escena del crimen obtendrá el parentezco para el culpable en nuestra base de datos</h5>
             <div class="container-formulario">
                 <form id="sistema">
-                    <label for="ingSecuencia">Ingrese la secuencia: </label>
-                    <input type="number" class="form-control" id="ingSecuencia" placeholder="Ej:01001001110101101101">
-                    <button id="buscar" type="button" class="btn-primary">Encontrar culpable</button>
-                    <div class="resultado"></div>
+                    <label for="dnaInput">Ingrese la secuencia: </label>
+                    <input type="number" class="form-control" id="dnaInput" placeholder="Ej:01001001110101101101">
+                    <button id="buscarCulpableBtn" type="button" class="btn-primary">Encontrar culpable</button>
+                    <div id="resultado"></div>
                 </form>
             </div>
         </div>
 
         <!--Scripts-->
-        <script></script>
+        <script>
+            document.getElementById('buscarCulpableBtn').addEventListener('click', function() {
+                if (validarLongitud()){
+                    buscarCulpable();
+                }
+            });
+        </script>
     </body>
 </html>
