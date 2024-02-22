@@ -31,3 +31,30 @@ const cargarFormularioClientes=()=>{
     listaClientes.style.display='none';
 }
 
+const crearCliente=()=>{
+    const nombreInput=document.getElementById('nombreCliente');
+    const edadInput=document.getElementById('edadCliente');
+    const emailInput=document.getElementById('emailCliente');
+
+    const nombre=nombreInput.value;
+    const edad=edadInput.value;
+    const email=emailInput.value;
+
+    const nuevoCliente={
+        id:listaClientes.length+1,
+        nombre:nombre,
+        edad:edad,
+        email:email
+    }
+
+    listaClientes.push(nuevoCliente);
+
+    nombreInput.value='';
+    edadInput.value='';
+    emailInput.value='';
+
+    alert('Cliente creado con éxito!');
+    console.log(listaClientes);
+
+    return nuevoCliente;
+}
