@@ -28,7 +28,7 @@ const cargarFormularioClientes=()=>{
         </form>
     `;
     const listadoClientes = document.getElementById('listado-clientes');
-    listaClientes.style.display='none';
+    listadoClientes.style.display='none';
 }
 
 const crearCliente=()=>{
@@ -70,7 +70,7 @@ const mostrarListado=()=>{
 
     for(const cliente of listaClientes){
         const li=document.createElement('li');
-        li.textContent='ID: ${cliente.id}, Nombre: ${cliente.nombre}, Edad: ${cliente.edad}, Email: ${cliente.email}';
+        li.textContent=`ID: ${cliente.id}, Nombre: ${cliente.nombre}, Edad: ${cliente.edad}, Email: ${cliente.email}`;
         ul.appendChild(li);
     }
 
