@@ -11,3 +11,23 @@ const cargarProductos=()=>{
         listaProductos.push(nuevoProducto);
     }
 }
+
+const cargarFormularioProductos=()=>{
+    const productosForm=document.getElementById('productos-form');
+    productosForm.innerHTML= `
+        <form>
+            <label for="codigoProducto">Código del Producto:</label>
+            <input type="text" id="codigoProducto" required>
+            <label for="descripcionProducto">Descripción del Producto:</label>
+            <input type="text" id="descripcionProducto" required>
+            <label for="precioProducto">Precio del Producto:</label>
+            <input type="number" id="precioProducto" required>
+            <button type="button" onclick="crearProducto()">Crear Producto</button>
+            <button type="button" onclick="mostrarListadoProductos()">Ver Listado de Productos</button>
+            <!-- Aquí se puede añadir más funcionalidad, como modificar y eliminar productos -->
+        </form>
+    `;
+
+    const listadoProductos= document.getElementById('listado-productos');
+    listadoProductos.style.display='none';
+}
