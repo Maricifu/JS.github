@@ -31,3 +31,39 @@ const cargarFormularioProductos=()=>{
     const listadoProductos= document.getElementById('listado-productos');
     listadoProductos.style.display='none';
 }
+
+const crearProducto=()=>{
+    const codigoInput = document.getElementById('codigoProducto');
+    const descripcionInput = document.getElementById('descripcionProducto');
+    const precioInput =document.getElementById('precioProducto');
+
+    const codigo = codigoInput.value;
+    const descripcion =  descripcionInput.value; 
+    const precio = precioInput.value;
+
+    if(!codigo || !descripcion || !precio) {
+        alert ('Por favor, completa todos los campos. ');
+        return;
+    }
+
+    const nuevoProducto={
+        codigo: codigo,
+        descripcion: descripcion,
+        precio: precio
+    };
+
+    listaProductos.push(nuevoProducto);
+    console.log('Producto creado:', nuevoProducto);
+    console.log('Lista de productos: ', listaProductos);
+
+    //limpiar campos del formulario 
+    codigoInput.value= '';
+    descripcionInput.value='';
+    precioInput.value='';
+
+    //mostrar mensaje de exito
+    alert('Producto creado con éxito! ');
+    actualizarProductosEnFacturas();
+
+    return nuevoProducto;
+}
