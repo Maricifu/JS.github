@@ -67,3 +67,36 @@ const crearProducto=()=>{
 
     return nuevoProducto;
 }
+
+const mostrarListadoProductos=()=>{
+    const productosForm = document.getElementById('productos-form');
+    const listadoProductos = document.getElementById('listado-productos');
+
+    //ocultar formulario de productos
+    document.getElementById('productos-form').style.display='none';
+
+    //mostrar listado de productos 
+    listadoProductos.style.display='block';
+
+    // crear una lista para mostrar los productos
+    const ul =document.createElement('ul');
+
+    //recorrer la lista de productos y agregar cada producto como un elemento de la lista
+    for (const producto of listaProductos){
+        const li = document.createElement('li');
+        li.textContent=`Codigo: ${producto.codigo}, Descripción: ${producto.descripcion}, Precio: ${producto.precio}`;
+        ul.appendChild(li);
+    }
+
+    // Limpiar el contenido anterior del contenedor de listado de productos
+    listadoProductos.innerHTML = '';
+
+    // Agregar la lista al contenedor
+    listadoProductos.appendChild(ul);
+
+    // Agregar botón para volver al formulario de productos
+    const volverButton = document.createElement('button');
+    volverButton.textContent = 'Volver al Formulario de Productos';
+    volverButton.addEventListener('click', volverAlFormularioProductos);
+    listadoProductos.appendChild(volverButton);
+}
