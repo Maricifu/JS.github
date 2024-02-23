@@ -100,3 +100,14 @@ const mostrarListadoProductos=()=>{
     volverButton.addEventListener('click', volverAlFormularioProductos);
     listadoProductos.appendChild(volverButton);
 }
+
+const volverAlFormularioProductos=()=>{
+    const productosForm = document.getElementById('productos-form');
+    const listadoProductos = document.getElementById('listado-productos');
+
+    // Ocultar listado de productos
+    listadoProductos.style.display = 'none';
+
+    // Mostrar formulario de productos
+    productosForm.style.display = 'block';
+}
