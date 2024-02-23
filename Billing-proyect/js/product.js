@@ -11,6 +11,3 @@ const cargarProductos=()=>{
         listaProductos.push(nuevoProducto);
     }
 }
-
-
-
