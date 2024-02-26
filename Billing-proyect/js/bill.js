@@ -48,3 +48,11 @@ const cargarFormularioFacturas=()=>{
     listaFacturas.style.display='none';
 
 }
+
+const generarOptionsProductos=()=>{
+    let options='';
+    for(const producto of listaProductos){
+        options+=`<option value="${producto.codigo}">${producto.descripcion}</option>`;
+    }
+    return options;
+}
