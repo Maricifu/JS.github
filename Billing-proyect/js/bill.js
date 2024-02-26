@@ -189,3 +189,14 @@ const mostrarListadoFacturas=()=>{
     volverButton.addEventListener('click', volverAlFormularioFacturas);
     listadoFacturas.appendChild(volverButton);
 }
+
+const volverAlFormularioFacturas=()=>{
+    const facturasForm = document.getElementById('facturas-form');
+    const listadoFacturas = document.getElementById('listado-facturas');
+
+    // Ocultar listado de facturas
+    listadoFacturas.style.display = 'none';
+
+    // Mostrar formulario de facturas
+    facturasForm.style.display = 'block';
+}
