@@ -6,3 +6,10 @@ const actulizarClientesEnFacturas=()=>{
     const opcionesClientes=generarOptionsClientes();
     clienteSelect.innerHTML=opcionesClientes;
 }
+
+const actulizarProductosEnFacturas=()=>{
+    const productosSelect=document.getElementById('productosFactura');
+    productosSelect.innerHTML='';
+    const opcionesProductos=generarOptionsProductos();
+    productosSelect.innerHTML=opcionesProductos;
+}
