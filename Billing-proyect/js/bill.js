@@ -56,3 +56,28 @@ const generarOptionsProductos=()=>{
     }
     return options;
 }
+
+const agregarItemFactura=()=>{
+    const productoSelect=document.getElementById('productosFactura');
+    const cantidadInput=document.getElementById('cantidadProducto');
+    const listadoItems=document.getElementById('listado-items');
+
+    const selectedProductoIndex=productoSelect.selectedIndex;
+    const cantidad=cantidadInput.value;
+    
+    if (selectedProductoIndex === -1 || !cantidad) {
+       alert('Por favor, selecciona un producto y especifica la cantidad.');
+       return;
+    }
+
+    const selectProducto=listaProductos[selectedProductoIndex];
+    const subtotal=selectProducto.precio*cantidad;
+
+    const li=document.createElement('li');
+    li.textContent= `${selectProducto.descripcion} - Cantidad: ${cantidad} - Subtotal: ${subtotal} `;
+    listadoItems.appendChild(li);
+
+    productoSelect.selectedIndex=-1;
+    cantidadInput.value='';
+
+}
