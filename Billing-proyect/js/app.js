@@ -3,5 +3,5 @@ document.addEventListener('DOMContentLoaded',()=>{
     cargarFormularioClientes();
     cargarProductos();
     cargarFormularioProductos();
-
+    cargarFormularioFacturas();
 })
