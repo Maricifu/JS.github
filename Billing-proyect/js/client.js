@@ -1,14 +1,42 @@
 const listaClientes= [];
 
-const cargarClientes=()=>{
-    for(let i=0;i<=10;i++){
-        const nuevoCliente={
-            id:i,
-            nombre:faker.name.findName(),
-            edad: Math.floor(Math.random*30)+18,
-            email: faker.internet.email()
-        };
-        listaClientes.push(nuevoCliente);
+const loadClientes= async()=>{
+    try{
+
+        const respuesta=await fetch('http://localhost:3000/clientes');
+
+        if(!respuesta.ok){
+           throw new Error('Error al cargar clientes. Estado: ',respuesta.status);
+        }
+        const clientes=await respuesta.json();
+        listaClientes.push(...clientes);
+
+    }catch(error){
+        console.error("Error al cargar clientes",error.message);
+    }
+}
+
+
+const guardarCliente= async(nuevoCliente)=>{
+    try{
+
+        const respuesta=await fetch('http://localhost:3000/clientes',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(nuevoCliente),
+        });
+
+        if(!respuesta.ok){
+           throw new Error('Error al crear el cliente. Estado: ',respuesta.status);
+        }
+        const clienteCreado=await respuesta.json();
+        
+        console.log('Cliente creado:', clienteCreado);
+
+    }catch(error){
+        console.error("Error al cargar clientes",error.message);
     }
 }
 
@@ -43,26 +71,30 @@ const crearCliente=()=>{
     const nuevoCliente={
         id:listaClientes.length+1,
         nombre:nombre,
-        edad:edad,
-        email:email
+        edad: edad,
+        email: email
     }
 
     listaClientes.push(nuevoCliente);
+    guardarCliente(nuevoCliente);
 
     nombreInput.value='';
     edadInput.value='';
     emailInput.value='';
 
     alert('Cliente creado con éxito!');
-    console.log(listaClientes);
+    
+    actulizarClientesEnFacturas();
 
     return nuevoCliente;
 }
 
-const mostrarListado=()=>{
-    const clientesForm=document.getElementById('clientes-form');
-    const listadoClientes=document.getElementById('listado-clientes');
-
+const mostrarListado= async ()=>{
+    listaClientes.length=0;
+    await loadClientes();
+    const clientesForm = document.getElementById('clientes-form');
+    const listadoClientes = document.getElementById('listado-clientes');
+    
     clientesForm.style.display='none';
     listadoClientes.style.display='block';
 
@@ -70,7 +102,7 @@ const mostrarListado=()=>{
 
     for(const cliente of listaClientes){
         const li=document.createElement('li');
-        li.textContent=`ID: ${cliente.id}, Nombre: ${cliente.nombre}, Edad: ${cliente.edad}, Email: ${cliente.email}`;
+        li.textContent= `ID: ${cliente.id}, Nombre: ${cliente.nombre}, Edad: ${cliente.edad}, Email: ${cliente.email}`;
         ul.appendChild(li);
     }
 
@@ -78,9 +110,10 @@ const mostrarListado=()=>{
     listadoClientes.appendChild(ul);
 
     const volverButton=document.createElement('button');
-    volverButton.textContent='Volver al formulario';
+    volverButton.textContent='Volver al Formulario';
     volverButton.addEventListener('click',volverFormulario);
     listadoClientes.appendChild(volverButton);
+    
 }
 
 const volverFormulario=()=>{

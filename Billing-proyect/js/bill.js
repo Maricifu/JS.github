@@ -49,6 +49,15 @@ const cargarFormularioFacturas=()=>{
 
 }
 
+const generarOptionsClientes=()=>{
+    let options='';
+    for(const cliente of listaClientes){
+        options+=`<option value="${cliente.id}">${cliente.nombre}</option>`;
+    }
+    return options;
+
+}
+
 const generarOptionsProductos=()=>{
     let options='';
     for(const producto of listaProductos){
