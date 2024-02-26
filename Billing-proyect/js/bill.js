@@ -79,5 +79,55 @@ const agregarItemFactura=()=>{
 
     productoSelect.selectedIndex=-1;
     cantidadInput.value='';
+}
 
+const crearFactura=()=>{
+    const fechaInput=document.getElementById('fechaFactura');
+    const clienteSelect=document.getElementById('clienteFactura');
+    const listadoItems=document.getElementById('listado-items');
+
+    const fecha=fechaInput.value;
+    const clienteId=clienteSelect.value;
+    const itemsFactura=[];
+    let totalFactura=0;
+
+    for(const li of listadoItems.getElementsByTagName('li')){
+        itemsFactura.push(li.textContent);
+        const cantidadMatch=li.textContent.match(/Cantidad: (\d+)/);
+        const subtotalMatch=li.textContent.match(/Subtotal: (\d+)/);
+      
+        if(cantidadMatch && subtotalMatch){
+            const cantidad=parseInt(cantidadMatch[1]);
+            const subtotal=parseInt(subtotalMatch[1]);
+            totalFactura+=subtotal;
+        }
+
+    }
+
+    if(!fecha || !clienteId || itemsFactura.length===0){
+        alert('Por favor, completa todos los campos y agrega al menos un item de la factura.');
+        return;
+    }
+
+    const cliente=listaClientes.find(c=>c.id===parseInt(clienteId));
+
+     
+      const nuevaFactura = {
+        fecha: fecha,
+        cliente: cliente,
+        items: itemsFactura,
+        total: totalFactura 
+    };
+
+
+    listaFacturas.push(nuevaFactura);
+
+    console.log("Factura creada ", nuevaFactura);
+    console.log("Listado de facturas:", listaFacturas);
+
+    fechaInput.value='';
+    clienteSelect.selectedIndex=0;
+    listadoItems.innerHTML='';
+
+    alert(`Factura creada con éxito! Total: ${totalFactura}`);
 }
