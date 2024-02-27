@@ -1,20 +1,49 @@
-const listaProductos =[];
+const listaProductos = [];
 
-const cargarProductos=()=>{
-    for(let i=1;i<=10;i++){
-        const nuevoProducto={
-            codigo: `PROD${i}`,
-            descripcion: faker.commerce.productName(),
-            precio: parseFloat(faker.commerce.price(10, 100, 2)),
-            existencias:parseInt(faker.random.number(50))+30,
-        };
-        listaProductos.push(nuevoProducto);
+
+const loadProductos= async()=>{
+    try{
+
+        listaProductos.length=0;
+        const respuesta=await fetch('http://localhost:3000/productos');
+
+        if(!respuesta.ok){
+           throw new Error('Error al cargar clientes. Estado: ',respuesta.status);
+        }
+        const productos=await respuesta.json();
+        listaProductos.push(...productos);
+
+    }catch(error){
+        console.error("Error al cargar clientes",error.message);
+    }
+}
+
+const guardarProducto= async(nuevoProducto)=>{
+    try{
+
+        const respuesta=await fetch('http://localhost:3000/productos',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(nuevoProducto),
+        });
+
+        if(!respuesta.ok){
+           throw new Error('Error al crear el cliente. Estado: ',respuesta.status);
+        }
+        const productoCreado=await respuesta.json();
+        
+        console.log('Producto creado:', productoCreado);
+
+    }catch(error){
+        console.error("Error al cargar productos",error.message);
     }
 }
 
 const cargarFormularioProductos=()=>{
-    const productosForm=document.getElementById('productos-form');
-    productosForm.innerHTML= `
+    const productosForm = document.getElementById('productos-form');
+    productosForm.innerHTML = `
         <form>
             <label for="codigoProducto">Código del Producto:</label>
             <input type="text" id="codigoProducto" required>
@@ -28,63 +57,69 @@ const cargarFormularioProductos=()=>{
         </form>
     `;
 
-    const listadoProductos= document.getElementById('listado-productos');
-    listadoProductos.style.display='none';
+    const listadoProductos = document.getElementById('listado-productos');
+    listadoProductos.style.display = 'none';
 }
 
-const crearProducto=()=>{
+const crearProducto=async ()=>{
     const codigoInput = document.getElementById('codigoProducto');
     const descripcionInput = document.getElementById('descripcionProducto');
-    const precioInput =document.getElementById('precioProducto');
+    const precioInput = document.getElementById('precioProducto');
 
     const codigo = codigoInput.value;
-    const descripcion =  descripcionInput.value; 
+    const descripcion = descripcionInput.value;
     const precio = precioInput.value;
 
-    if(!codigo || !descripcion || !precio) {
-        alert ('Por favor, completa todos los campos. ');
+    if (!codigo || !descripcion || !precio) {
+        alert('Por favor, completa todos los campos.');
         return;
     }
 
-    const nuevoProducto={
+    const nuevoProducto = {
+        id:listaProductos.length+1,
         codigo: codigo,
         descripcion: descripcion,
         precio: precio
     };
 
-    listaProductos.push(nuevoProducto);
+    
+    await guardarProducto(nuevoProducto);
+    await loadProductos();
     console.log('Producto creado:', nuevoProducto);
-    console.log('Lista de productos: ', listaProductos);
+    console.log('Lista de productos:', listaProductos);
 
-    //limpiar campos del formulario 
-    codigoInput.value= '';
-    descripcionInput.value='';
-    precioInput.value='';
+    // Limpiar campos del formulario
+    codigoInput.value = '';
+    descripcionInput.value = '';
+    precioInput.value = '';
 
-    //mostrar mensaje de exito
-    alert('Producto creado con éxito! ');
-    actualizarProductosEnFacturas();
+    // Mostrar mensaje de éxito
+    alert('Producto creado con éxito!');
+    actulizarProductosEnFacturas();
+    
 
     return nuevoProducto;
+
 }
 
-const mostrarListadoProductos=()=>{
+const mostrarListadoProductos=async ()=>{
+    await loadProductos();
     const productosForm = document.getElementById('productos-form');
     const listadoProductos = document.getElementById('listado-productos');
 
-    //ocultar formulario de productos
-    document.getElementById('productos-form').style.display='none';
+    // Ocultar formulario de clientes
+    document.getElementById('productos-form').style.display = 'none';
 
-    //mostrar listado de productos 
-    listadoProductos.style.display='block';
+    // Mostrar listado de productos
+    listadoProductos.style.display = 'block';
 
-    // crear una lista para mostrar los productos
-    const ul =document.createElement('ul');
+    // Crear una lista (ul) para mostrar los productos
+    const ul = document.createElement('ul');
 
-    //recorrer la lista de productos y agregar cada producto como un elemento de la lista
-    for (const producto of listaProductos){
+    // Recorrer la lista de productos y agregar cada producto como un elemento de lista (li)
+    for (const producto of listaProductos) {
         const li = document.createElement('li');
-        li.textContent=`Codigo: ${producto.codigo}, Descripción: ${producto.descripcion}, Precio: ${producto.precio}`;
+        li.textContent = `Código: ${producto.codigo}, Descripción: ${producto.descripcion}, Precio: ${producto.precio}`;
         ul.appendChild(li);
     }
 
